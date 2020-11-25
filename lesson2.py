@@ -19,7 +19,7 @@ c = math.floor(a)  # округление в меньшую сторону
 print(c)
 
 number = [1, 2, 3, 4, 4.3]
-count = sum(number)
+count = sum(number)  # сумма чисел из списка
 print(count)
 
 z = 25
