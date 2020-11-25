@@ -1,9 +1,10 @@
 try:
-    personal_code = str(int(input('Please enter your personal code\n')))
+    personal_code = str(int(input('Please enter your personal code:\n')))  # строка преобразуется в число для проверки,
+    # что пользователь ввёл число
 
-    if len(personal_code) != 11:
-        print('Personal code length is wrong')
-        exit()
+    while len(personal_code) != 11:
+        print('Personal code length is wrong.')
+        personal_code = str(int(input('Please enter valid personal code:\n')))
 
     if personal_code[0] == '2' or personal_code[0] == '4' or personal_code[0] == '6':
         print(
@@ -21,4 +22,4 @@ try:
         print('Something is wrong. Please check your personal code.')
 
 except ValueError:
-    print('Entered personal code consists letters or symbols')
+    print('Entered personal code consists letters or symbols.')
