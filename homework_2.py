@@ -13,11 +13,11 @@ try:
             sep=''
         )
     elif personal_code[0] == '1' or personal_code[0] == '3' or personal_code[0] == '5':
-            print(
-                'You are man. Your birthday is ',
-                personal_code[5:7], '.', personal_code[3:5], '.', personal_code[1:3],
-                sep=''
-            )
+        print(
+            'You are man. Your birthday is ',
+            personal_code[5:7], '.', personal_code[3:5], '.', personal_code[1:3],
+            sep=''
+        )
     else:
         print('Something is wrong. Please check your personal code.')
 
