@@ -11,10 +11,13 @@ def check_personal_code(personal_code):
     control_character = personal_code[10]
     control_string = '0123456789ABCDEFHJKLMNPRSTUVWXY'
 
+    # проверяется, совпадает ли последний символ личного кода с вычисленным символом из контрольного списка
     return control_character == control_string[control_number_final]
 
 
 def get_personal_info(personal_code):
+    # функия получает информацию из личного кода - дату рождения, пол, информацию о резиденстве. Если в личном коде
+    # ошибка, то возращает False.
     if personal_code[6] == '+':
         century = '18'
     elif personal_code[6] == '-':
@@ -24,8 +27,9 @@ def get_personal_info(personal_code):
     else:
         return False
 
-    birthday_control = personal_code[0:2] + personal_code[2:4] + century + personal_code[4:6]
-    birthday_control_format = datetime.strptime(birthday_control, '%d%m%Y')
+    # получаем дату рождения
+    birthday_format = personal_code[0:2] + personal_code[2:4] + century + personal_code[4:6]
+    birthday = datetime.strptime(birthday_format, '%d%m%Y')
 
     gender_number = int(personal_code[7:10]) % 2
     if gender_number == 1:
@@ -40,10 +44,12 @@ def get_personal_info(personal_code):
         residence = 'You have temporary personal identification. You are alien :)'
     else:
         return False
-    return birthday_control_format, gender, residence
+
+    return birthday, gender, residence
 
 
 def main():
+    # функция запрашивает личный код и выводит информацию по нему. В случае ошибки запрашивает его снова.
     message = 'Please enter your personal code:\n'
     error_message = 'Personal code is wrong.'
     while True:
@@ -51,7 +57,7 @@ def main():
             personal_code = input(message)
             if check_personal_code(personal_code) is True:
                 if get_personal_info(personal_code) is not False:
-                    birthday_control_format, gender, residence = get_personal_info(personal_code)
+                    birthday, gender, residence = get_personal_info(personal_code)
                     break
 
             print(error_message)
@@ -61,10 +67,10 @@ def main():
         message = 'Please enter valid personal code:\n'
 
     today = date.today()
-    age = today.year - birthday_control_format.year
+    age = today.year - birthday.year
 
     print('Your personal code is', personal_code + '. You are', gender + '.')
-    print('Your birthday is', birthday_control_format.strftime('%d.%m.%Y') + '. You are', age, 'years old.')
+    print('Your birthday is', birthday.strftime('%d.%m.%Y') + '. You are', age, 'years old.')
     print(residence)
 
 
