@@ -1,5 +1,5 @@
 some_text = input('Please enter some text: ')
-text = list(some_text)
+text = some_text.replace(' ', '')
 print(text)
 
 if text == text[::-1]:
